@@ -15,9 +15,16 @@ import java.util.Optional;
 @RequestMapping("employers")
 public class EmployerController {
 
-
     @Autowired
     private EmployerRepository employerRepository;
+
+    //added to handle redirects
+    @GetMapping
+    public String displayAllEmployers(Model model) {
+        model.addAttribute("title", "All Employers");
+        model.addAttribute("employers", this.employerRepository.findAll());
+        return "employers/index";
+    }
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
