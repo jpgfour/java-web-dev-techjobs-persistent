@@ -9,14 +9,14 @@ public class Skill extends AbstractEntity {
 
     @Size(min = 1, max = 100)
     @NotBlank
-    private String verboseSkill;
+    private String description;
 
-    public String getVerboseSkill() {
-        return verboseSkill;
+    public String getDescription() {
+        return description;
     }
 
-    public void setVerboseSkill(String verboseSkill) {
-        this.verboseSkill = verboseSkill;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     //no-arg constructor for hibernate
