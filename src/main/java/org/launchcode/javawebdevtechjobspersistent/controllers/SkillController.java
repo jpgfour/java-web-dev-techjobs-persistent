@@ -1,7 +1,9 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
 import org.launchcode.javawebdevtechjobspersistent.models.Employer;
+import org.launchcode.javawebdevtechjobspersistent.models.Skill;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
+import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,42 +14,42 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("employers")
-public class EmployerController {
+@RequestMapping("skill")
+public class SkillController {
 
 
     @Autowired
-    private EmployerRepository employerRepository;
+    private SkillRepository skillRepository;
 
     @GetMapping("add")
-    public String displayAddEmployerForm(Model model) {
-        model.addAttribute(new Employer());
-        return "employers/add";
+    public String displayAddSkillForm(Model model) {
+        model.addAttribute(new Skill());
+        return "skill/add";
     }
 
     @PostMapping("add")
-    public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
+    public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill,
                                     Errors errors, Model model) {
 
         if (errors.hasErrors()) {
-            return "employers/add";
+            return "skill/add";
         } else {
             //added next line to save
             //moved 2nd line after inside the else
-            this.employerRepository.save(newEmployer);
+            this.skillRepository.save(newSkill);
             return "redirect:";
         }
     }
 
-    @GetMapping("view/{employerId}")
-    public String displayViewEmployer(Model model, @PathVariable int employerId) {
+    @GetMapping("view/{skillId}")
+    public String displayViewSkill(Model model, @PathVariable int skillId) {
 
         //changed from = null to querying the employerRepository
-        Optional optEmployer = this.employerRepository.findById(employerId);
-        if (optEmployer.isPresent()) {
-            Employer employer = (Employer) optEmployer.get();
-            model.addAttribute("employer", employer);
-            return "employers/view";
+        Optional optSkill = this.skillRepository.findById(skillId);
+        if (optSkill.isPresent()) {
+            Skill skill = (Skill) optSkill.get();
+            model.addAttribute("skill", skill);
+            return "skill/view";
         } else {
             return "redirect:../";
         }
