@@ -1,6 +1,7 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 public class Job extends AbstractEntity {
@@ -14,6 +15,7 @@ public class Job extends AbstractEntity {
 
     @ManyToOne
     private Employer employer;
+
     private String skills;
 
     public Job() {
