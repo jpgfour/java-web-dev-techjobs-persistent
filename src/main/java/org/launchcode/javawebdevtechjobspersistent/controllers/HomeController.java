@@ -42,13 +42,21 @@ public class HomeController {
 
     @GetMapping("add")
     public String displayAddJobForm(Model model) {
-        model.addAttribute("title", "Add Job");
-        model.addAttribute(new Job());
-        model.addAttribute("employers",employerRepository.findAll());
-        //not sure this is needed but let's find out
-        model.addAttribute("skills",skillRepository.findAll());
-        return "add";
-    }
+        //adding in error catching in case trying to add a job without defined employers or skills to pick from (i.e. after table drop)
+        //didn't work...following instructions and making sure to pre-populate employers and skills *before* adding jobs
+//        if(errors.hasErrors()) {
+//            model.addAttribute("title", "Add Job");
+//            return "add";
+//        } else {
+
+            model.addAttribute("title", "Add Job");
+            model.addAttribute(new Job());
+            model.addAttribute("employers", employerRepository.findAll());
+            //not sure this is needed but let's find out
+            model.addAttribute("skills", skillRepository.findAll());
+            return "add";
+        }
+    //}
 
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
