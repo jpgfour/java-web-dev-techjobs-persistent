@@ -1,5 +1,10 @@
 ## Part 1: Test it with SQL
 SHOW COLUMNS FROM techjobs.job;
+## columns/datatype
+## employer_id/int
+## id/int
+## jobs_id/int
+## name/varchar(100)
 ## Part 2: Test it with SQL
 SELECT * FROM techjobs.employer WHERE location = 'St. Louis City';
 ## Part 3: Test it with SQL
